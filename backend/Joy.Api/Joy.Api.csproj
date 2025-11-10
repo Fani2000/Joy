@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting" Version="9.0.0" />
+    <PackageReference Include="Aspire.MongoDB.Driver" Version="9.0.0" />
+    <PackageReference Include="Aspire.RabbitMQ.Client" Version="9.0.0" />
+    <PackageReference Include="HotChocolate.AspNetCore" Version="14.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="7.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Joy.Modules.Gifts\Joy.Modules.Gifts.csproj" />
+    <ProjectReference Include="..\Joy.Modules.Messages\Joy.Modules.Messages.csproj" />
+    <ProjectReference Include="..\Joy.Modules.Friends\Joy.Modules.Friends.csproj" />
+    <ProjectReference Include="..\Joy.Modules.AI\Joy.Modules.AI.csproj" />
+    <ProjectReference Include="..\Joy.Modules.Communication\Joy.Modules.Communication.csproj" />
+    <ProjectReference Include="..\Joy.Modules.Shared\Joy.Modules.Shared.csproj" />
+  </ItemGroup>
+
+</Project>
+
