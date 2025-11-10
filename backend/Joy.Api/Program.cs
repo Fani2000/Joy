@@ -144,13 +144,35 @@ else
 }
 
 // Seed database with initial data
-if (app.Environment.IsDevelopment())
+// Check configuration or environment to determine if seeding should run
+var shouldSeed = app.Configuration.GetValue<bool>("DatabaseSeeding:Enabled", true);
+var seedOnlyInDevelopment = app.Configuration.GetValue<bool>("DatabaseSeeding:OnlyInDevelopment", true);
+
+if (shouldSeed && (seedOnlyInDevelopment || app.Environment.IsDevelopment()))
 {
-    using (var scope = app.Services.CreateScope())
+    Console.WriteLine("🌱 Starting database seeding...");
+    
+    try
     {
-        var seeder = scope.ServiceProvider.GetRequiredService<DatabaseSeeder>();
-        await seeder.SeedAsync();
+        using (var scope = app.Services.CreateScope())
+        {
+            var seeder = scope.ServiceProvider.GetRequiredService<DatabaseSeeder>();
+            await seeder.SeedAsync();
+        }
+        
+        Console.WriteLine("✅ Database seeding completed successfully!");
     }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"❌ Database seeding failed: {ex.Message}");
+        // Log but don't stop the application
+        var logger = app.Services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "Failed to seed database. Application will continue to run.");
+    }
+}
+else
+{
+    Console.WriteLine("⏭️  Database seeding skipped (disabled in configuration or not in Development mode)");
 }
 
 // Map GraphQL endpoint
