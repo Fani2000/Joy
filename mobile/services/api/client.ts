@@ -1,18 +1,18 @@
 import axios, { AxiosError } from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getPlatformSpecificEndpoint } from '../../config/api';
 
 /**
  * GraphQL Client Configuration
  * 
- * Endpoint: http://localhost:5000/graphql
- * 
- * Note: For Android emulator, you may need to use http://10.0.2.2:5000/graphql
- * For iOS simulator, localhost works fine
- * For physical devices, use your machine's IP address
+ * Automatically detects platform and uses correct endpoint:
+ * - Android emulator: http://10.0.2.2:5000/graphql
+ * - iOS simulator: http://localhost:5000/graphql
+ * - Production: https://your-production-api.com/graphql
  */
 
-// GraphQL endpoint - Set to localhost:5000 as requested
-const GRAPHQL_ENDPOINT = 'http://localhost:5000/graphql';
+// GraphQL endpoint - Platform-specific
+const GRAPHQL_ENDPOINT = getPlatformSpecificEndpoint();
 
 export const graphqlClient = axios.create({
   baseURL: GRAPHQL_ENDPOINT,

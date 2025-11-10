@@ -40,3 +40,10 @@ artifacts/
 # Node
 node_modules/
 
+# Docker environment files (contains secrets)
+.env
+devops/docker/.env
+
+# Development settings (may contain sensitive info)
+appsettings.Development.json
+

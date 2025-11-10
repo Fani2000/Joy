@@ -36,5 +36,9 @@ export const getPlatformSpecificEndpoint = () => {
   } else {
     return 'http://localhost:5000/graphql'; // Web or other
   }
+  
+  // For PHYSICAL DEVICES, uncomment and use your PC's IP address:
+  // Your PC IP: 192.168.0.168
+  // return 'http://192.168.0.168:5000/graphql';
 };
 
