@@ -123,10 +123,10 @@ export default function SendMessageScreen() {
                 disabled={generatingAI}
               >
                 {generatingAI ? (
-                  <ActivityIndicator size="small" color="#6366f1" />
+                  <ActivityIndicator size="small" color="#ec4899" />
                 ) : (
                   <>
-                    <Ionicons name="sparkles" size={16} color="#6366f1" />
+                    <Ionicons name="sparkles" size={16} color="#ec4899" />
                     <Text style={styles.aiButtonText}>AI Generate</Text>
                   </>
                 )}
@@ -268,7 +268,7 @@ const styles = StyleSheet.create({
   aiButtonText: {
     fontSize: 12,
     fontWeight: '600',
-    color: '#6366f1',
+    color: '#ec4899',
   },
   inputContainer: {
     flexDirection: 'row',

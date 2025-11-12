@@ -1,5 +1,7 @@
 import { executeGraphQL } from './client';
 import { Friend, FriendInput } from './types';
+import { USE_MOCK_DATA } from '../../config/api';
+import { mockApi } from './mockData';
 
 /**
  * Friends Service
@@ -10,6 +12,12 @@ import { Friend, FriendInput } from './types';
  * Fetch all friends
  */
 export const getFriends = async (): Promise<Friend[]> => {
+  // Use mock data if enabled
+  if (USE_MOCK_DATA) {
+    console.log('👥 Using mock data for friends');
+    return mockApi.getFriends();
+  }
+
   const query = `
     query GetFriends {
       friends {
@@ -34,6 +42,12 @@ export const getFriends = async (): Promise<Friend[]> => {
  * Add a new friend
  */
 export const addFriend = async (input: FriendInput): Promise<Friend> => {
+  // Use mock data if enabled
+  if (USE_MOCK_DATA) {
+    console.log('👥 Using mock data to add friend');
+    return mockApi.addFriend(input);
+  }
+
   const mutation = `
     mutation AddFriend($input: FriendInput!) {
       addFriend(input: $input) {
@@ -58,6 +72,12 @@ export const addFriend = async (input: FriendInput): Promise<Friend> => {
  * Delete a friend by ID
  */
 export const deleteFriend = async (id: string): Promise<boolean> => {
+  // Use mock data if enabled
+  if (USE_MOCK_DATA) {
+    console.log('👥 Using mock data to delete friend');
+    return mockApi.deleteFriend(id);
+  }
+
   const mutation = `
     mutation DeleteFriend($id: String!) {
       deleteFriend(id: $id)
@@ -77,6 +97,12 @@ export const deleteFriend = async (id: string): Promise<boolean> => {
  * Get friends with upcoming birthdays
  */
 export const getUpcomingBirthdays = async (days: number = 7): Promise<Friend[]> => {
+  // Use mock data if enabled
+  if (USE_MOCK_DATA) {
+    console.log('👥 Using mock data for upcoming birthdays');
+    return mockApi.getUpcomingBirthdays(days);
+  }
+
   const query = `
     query GetUpcomingBirthdays($days: Int!) {
       upcomingBirthdays(days: $days) {

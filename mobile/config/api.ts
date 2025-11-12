@@ -5,6 +5,10 @@ import { Platform } from 'react-native';
  * Configure your backend GraphQL endpoint here
  */
 
+// Set to true to use mock data instead of real API
+// Change to false when backend is available
+export const USE_MOCK_DATA = true;
+
 // Backend API configuration
 export const API_CONFIG = {
   // GraphQL endpoint - Currently set to localhost:5000

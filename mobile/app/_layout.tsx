@@ -12,10 +12,15 @@ function RootLayoutNav() {
     if (isLoading) return;
 
     const inAuthGroup = segments[0] === '(tabs)';
+    const inProtectedRoute = inAuthGroup || 
+                             segments[0] === 'send-gift' || 
+                             segments[0] === 'send-message' ||
+                             segments[0] === 'add-friend' ||
+                             segments[0] === 'friends-list';
 
-    if (!user && inAuthGroup) {
+    if (!user && inProtectedRoute) {
       router.replace('/login');
-    } else if (user && !inAuthGroup) {
+    } else if (user && segments[0] === 'login') {
       router.replace('/(tabs)');
     }
   }, [user, segments, isLoading]);
@@ -26,7 +31,7 @@ function RootLayoutNav() {
       <Stack
         screenOptions={{
           headerStyle: {
-            backgroundColor: '#6366f1',
+            backgroundColor: '#ec4899',
           },
           headerTintColor: '#fff',
           headerTitleStyle: {
@@ -54,6 +59,18 @@ function RootLayoutNav() {
               fontWeight: '900',
               fontSize: 18,
             }
+          }} 
+        />
+        <Stack.Screen 
+          name="add-friend" 
+          options={{ 
+            headerShown: false,
+          }} 
+        />
+        <Stack.Screen 
+          name="friends-list" 
+          options={{ 
+            headerShown: false,
           }} 
         />
         <Stack.Screen 

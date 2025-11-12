@@ -10,8 +10,9 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useAuth } from '../../contexts/AuthContext';
-import { getGifts, getMessages } from '../../services/api';
+import { getGifts, getMessages, getFriends } from '../../services/api';
 import { useRouter } from 'expo-router';
+import { useFocusEffect } from '@react-navigation/native';
 
 export default function ProfileScreen() {
   const { user, logout } = useAuth();
@@ -22,19 +23,26 @@ export default function ProfileScreen() {
     loadStats();
   }, [user]);
 
+  useFocusEffect(
+    React.useCallback(() => {
+      loadStats();
+    }, [user])
+  );
+
   const loadStats = async () => {
     if (!user?.email) return;
 
     try {
-      const [giftsData, messagesData] = await Promise.all([
+      const [giftsData, messagesData, friendsData] = await Promise.all([
         getGifts(user.email).catch(() => []),
         getMessages(user.email).catch(() => []),
+        getFriends().catch(() => []),
       ]);
 
       setStats({
         gifts: giftsData.length,
         messages: messagesData.length,
-        friends: 0,
+        friends: friendsData.length,
       });
     } catch (error) {
       console.log('Error loading stats:', error);
@@ -62,7 +70,7 @@ export default function ProfileScreen() {
   const renderSettingItem = (icon: string, title: string, subtitle: string) => (
     <TouchableOpacity style={styles.settingItem}>
       <View style={styles.settingIcon}>
-        <Ionicons name={icon as any} size={24} color="#6366f1" />
+        <Ionicons name={icon as any} size={24} color="#ec4899" />
       </View>
       <View style={styles.settingContent}>
         <Text style={styles.settingTitle}>{title}</Text>
@@ -77,7 +85,7 @@ export default function ProfileScreen() {
       <View style={styles.profileHeader}>
         <View style={styles.avatarContainer}>
           <View style={styles.avatar}>
-            <Ionicons name="person" size={48} color="#6366f1" />
+            <Ionicons name="person" size={48} color="#ec4899" />
           </View>
         </View>
         <Text style={styles.profileEmail}>{user?.email}</Text>
@@ -93,10 +101,14 @@ export default function ProfileScreen() {
             <Text style={styles.statValue}>{stats.messages}</Text>
             <Text style={styles.statLabel}>Messages Sent</Text>
           </View>
-          <View style={styles.statCard}>
+          <TouchableOpacity 
+            style={styles.statCard}
+            onPress={() => router.push('/friends-list')}
+          >
             <Text style={styles.statValue}>{stats.friends}</Text>
             <Text style={styles.statLabel}>Friends</Text>
-          </View>
+            <Ionicons name="chevron-forward" size={16} color="#9ca3af" style={styles.statIcon} />
+          </TouchableOpacity>
         </View>
 
         <View style={styles.section}>
@@ -142,11 +154,11 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
     borderRadius: 40,
-    backgroundColor: '#eef2ff',
+    backgroundColor: '#fce7f3',
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 3,
-    borderColor: '#6366f1',
+    borderColor: '#ec4899',
   },
   profileEmail: {
     fontSize: 16,
@@ -177,13 +189,16 @@ const styles = StyleSheet.create({
   statValue: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#6366f1',
+    color: '#ec4899',
     marginBottom: 4,
   },
   statLabel: {
     fontSize: 12,
     color: '#6b7280',
     textAlign: 'center',
+  },
+  statIcon: {
+    marginTop: 4,
   },
   section: {
     marginBottom: 24,
@@ -212,7 +227,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: '#eef2ff',
+    backgroundColor: '#fce7f3',
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 12,

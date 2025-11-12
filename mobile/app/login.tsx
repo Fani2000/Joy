@@ -46,13 +46,13 @@ export default function LoginScreen() {
       style={styles.container}
     >
       <LinearGradient
-        colors={['#6366f1', '#8b5cf6', '#a855f7']}
+        colors={['#ec4899', '#f59e0b', '#f97316']}
         style={styles.gradient}
       >
         <View style={styles.content}>
           <View style={styles.header}>
-            <Text style={styles.logo}>✨ Joy</Text>
-            <Text style={styles.tagline}>Spread happiness to your friends</Text>
+            <Text style={styles.logo}>💝 Joy</Text>
+            <Text style={styles.tagline}>Celebrate Life, Share Love & Give Joy</Text>
           </View>
 
           <View style={styles.form}>
@@ -100,7 +100,7 @@ export default function LoginScreen() {
               disabled={loading}
             >
               <LinearGradient
-                colors={['#6366f1', '#8b5cf6']}
+                colors={['#ec4899', '#8b5cf6']}
                 style={styles.buttonGradient}
               >
                 {loading ? (
@@ -114,7 +114,7 @@ export default function LoginScreen() {
             <View style={styles.demoNote}>
               <Ionicons name="information-circle-outline" size={20} color="#6366f1" />
               <Text style={styles.demoText}>
-                Demo: Use any email and password to login
+                Demo: Login with any email to see sample data
               </Text>
             </View>
           </View>

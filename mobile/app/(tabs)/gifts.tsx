@@ -62,7 +62,7 @@ export default function GiftsScreen() {
   const renderGiftItem = ({ item }: { item: Gift }) => (
     <View style={styles.giftCard}>
       <View style={styles.giftIcon}>
-        <Ionicons name="gift" size={28} color="#6366f1" />
+        <Ionicons name="gift" size={28} color="#f59e0b" />
       </View>
       <View style={styles.giftDetails}>
         <Text style={styles.giftTitle}>{item.title}</Text>
@@ -104,7 +104,7 @@ export default function GiftsScreen() {
   if (loading) {
     return (
       <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#6366f1" />
+        <ActivityIndicator size="large" color="#f59e0b" />
       </View>
     );
   }
@@ -118,9 +118,25 @@ export default function GiftsScreen() {
         contentContainerStyle={styles.listContent}
         ListEmptyComponent={renderEmptyState}
         refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={['#6366f1']} />
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={['#f59e0b']} />
         }
       />
+      
+      {/* Floating Action Button */}
+      {gifts.length > 0 && (
+        <TouchableOpacity
+          style={styles.fab}
+          onPress={() => router.push('/send-gift')}
+          activeOpacity={0.8}
+        >
+          <LinearGradient
+            colors={['#f59e0b', '#f97316']}
+            style={styles.fabGradient}
+          >
+            <Ionicons name="add" size={28} color="#fff" />
+          </LinearGradient>
+        </TouchableOpacity>
+      )}
     </View>
   );
 }
@@ -230,6 +246,25 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#f9fafb',
+  },
+  fab: {
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+    borderRadius: 28,
+    overflow: 'hidden',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 8,
+  },
+  fabGradient: {
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 

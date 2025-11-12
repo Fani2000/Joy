@@ -9,11 +9,11 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: '#6366f1',
+        tabBarActiveTintColor: '#ec4899',
         tabBarInactiveTintColor: '#9ca3af',
         headerShown: true,
         headerStyle: {
-          backgroundColor: '#6366f1',
+          backgroundColor: '#ec4899',
           height: 100,
         },
         headerTintColor: '#fff',
@@ -21,12 +21,12 @@ export default function TabLayout() {
           fontWeight: '900',
           fontSize: 18,
         },
-        headerTitle: '✨ Joy',
+        headerTitle: '💝 Joy',
         headerTitleAlign: 'center',
         tabBarStyle: {
           backgroundColor: '#fff',
           borderTopWidth: 1,
-          borderTopColor: '#e5e7eb',
+          borderTopColor: '#fbcfe8',
           paddingBottom: Platform.OS === 'ios' ? insets.bottom : 8,
           paddingTop: 8,
           height: Platform.OS === 'ios' ? 65 + insets.bottom : 65,

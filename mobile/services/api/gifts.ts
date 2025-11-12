@@ -1,5 +1,7 @@
 import { executeGraphQL } from './client';
 import { Gift, GiftInput } from './types';
+import { USE_MOCK_DATA } from '../../config/api';
+import { mockApi } from './mockData';
 
 /**
  * Gift Service
@@ -10,6 +12,12 @@ import { Gift, GiftInput } from './types';
  * Fetch all gifts for a specific sender
  */
 export const getGifts = async (senderEmail: string): Promise<Gift[]> => {
+  // Use mock data if enabled
+  if (USE_MOCK_DATA) {
+    console.log('📦 Using mock data for gifts');
+    return mockApi.getGifts(senderEmail);
+  }
+
   const query = `
     query GetGifts($senderEmail: String!) {
       gifts(senderEmail: $senderEmail) {
@@ -37,6 +45,12 @@ export const getGifts = async (senderEmail: string): Promise<Gift[]> => {
  * Send a new gift
  */
 export const sendGift = async (input: GiftInput): Promise<Gift> => {
+  // Use mock data if enabled
+  if (USE_MOCK_DATA) {
+    console.log('📦 Using mock data to send gift');
+    return mockApi.sendGift(input);
+  }
+
   const mutation = `
     mutation SendGift($input: GiftInput!) {
       addGift(input: $input) {
@@ -64,6 +78,12 @@ export const sendGift = async (input: GiftInput): Promise<Gift> => {
  * Delete a gift by ID
  */
 export const deleteGift = async (id: string): Promise<boolean> => {
+  // Use mock data if enabled
+  if (USE_MOCK_DATA) {
+    console.log('📦 Using mock data to delete gift');
+    return mockApi.deleteGift(id);
+  }
+
   const mutation = `
     mutation DeleteGift($id: String!) {
       deleteGift(id: $id)
