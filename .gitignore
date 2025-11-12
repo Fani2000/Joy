@@ -327,6 +327,9 @@ backend/**/_site/
 ## MongoDB local data
 data/
 dump/
+# Allow backend Data seeding files
+!backend/**/Data/
+!backend/**/Data/**
 
 # ============================================
 # SECURITY / CERTIFICATES

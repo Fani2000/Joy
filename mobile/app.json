@@ -10,7 +10,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#6366f1"
+      "backgroundColor": "#ec4899"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -22,9 +22,10 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#6366f1"
+        "backgroundColor": "#ec4899"
       },
-      "package": "com.joy.app"
+      "package": "com.joy.app",
+      "permissions": []
     },
     "web": {
       "bundler": "metro",
